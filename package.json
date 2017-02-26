@@ -1,0 +1,26 @@
+{
+  "name": "ned2k",
+  "version": "0.0.1",
+  "description": "emule for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErosZy/ned2k.git"
+  },
+  "keywords": [
+    "emule",
+    "node"
+  ],
+  "author": "zyEros",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ErosZy/ned2k/issues"
+  },
+  "homepage": "https://github.com/ErosZy/ned2k#readme",
+  "dependencies": {
+    "js-md4": "^0.3.2"
+  }
+}
