@@ -6,6 +6,6 @@ class ConnPacket extends UsualPacket {
     }
 }
 
-exports.Conn = ConnPacket;
+exports.Protocol = ConnPacket;
 exports.SIZE = {};
 exports.TOTAL_SIZE = 0;

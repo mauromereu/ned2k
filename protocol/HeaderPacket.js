@@ -26,7 +26,7 @@ class HeaderPacket extends UsualPacket {
     }
 }
 
-exports.Header = HeaderPacket;
+exports.Protocol = HeaderPacket;
 exports.TOTAL_SIZE = 6;
 exports.SIZE = {
     PROTOCOL: 1,

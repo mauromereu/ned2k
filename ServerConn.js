@@ -1,6 +1,6 @@
 const TcpConn = require('./TCPConn');
-const Header = require('./protocol/HeaderPacket');
-const Conn = require('./protocol/server/ConnPacket');
+const HeaderPacket = require('./protocol/HeaderPacket');
+const ConnPacket = require('./protocol/server/ConnPacket');
 
 class ServerConn extends TCPConn {
     constructor(host, port) {

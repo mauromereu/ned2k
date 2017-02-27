@@ -25,7 +25,7 @@ class TCPConn extends EventEmitter {
 
         this._state = PARSE_HEADER_STATE;
         this._buffer = Buffer.alloc(0);
-        this._headerPacket = new HeaderPacket.Header();
+        this._headerPacket = new HeaderPacket.Protocol();
     }
 
     write(buffer) {
@@ -71,7 +71,7 @@ class TCPConn extends EventEmitter {
                     });
 
                     this._buffer = this._buffer.slice(size);
-                    this._headerPacket = new HeaderPacket.Header();
+                    this._headerPacket = new HeaderPacket.Protocol();
                     this._state = PARSE_HEADER_STATE;
                     break;
             }
