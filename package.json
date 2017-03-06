@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/ErosZy/ned2k#readme",
   "dependencies": {
+    "int64-buffer": "^0.1.9",
     "js-md4": "^0.3.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
   }
 }
