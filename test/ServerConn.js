@@ -19,7 +19,7 @@ describe('ServerConn', () => {
   });
 
   it('#login request', (done) => {
-    server.addListener('data', (info) => {
+    server.addListener('processend', (info) => {
       done();
     });
   });
