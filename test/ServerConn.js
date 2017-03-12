@@ -8,6 +8,7 @@ describe('ServerConn', () => {
   let server = null;
   beforeEach(() => {
     server = new ServerConn(SERVER_HOST, SERVER_PORT);
+    server.isDone = false;
   });
 
   afterEach(() => {
@@ -15,18 +16,23 @@ describe('ServerConn', () => {
   })
 
   it('#connect', (done) => {
-    server.addListener('connect', done);
+    server.on('connect', done);
   });
 
   it('#login request', (done) => {
-    server.addListener('processend', (info) => {
-      done();
+    server.isDone = false;
+    server.on('processend', (info) => {
+      if (!server.isDone) {
+        server.isDone = true;
+        done();
+      }
     });
   });
 
   it('#server message', (done) => {
     server.addListener('serverMessage', (message) => {
-      if (message) {
+      if (!server.isDone && message) {
+        server.isDone = true;
         done();
       }
     });
@@ -34,7 +40,8 @@ describe('ServerConn', () => {
 
   it('#server status', (done) => {
     server.addListener('serverStatus', (data) => {
-      if (data.users != null && data.files != null) {
+      if (!server.isDone && data.users != null && data.files != null) {
+        server.isDone = true;
         done();
       }
     });
@@ -42,7 +49,9 @@ describe('ServerConn', () => {
 
   it('#id change', (done) => {
     server.addListener('idChange', (newId) => {
-      newId && done();
+      if (!server.isDone && newId) {
+        done();
+      }
     });
   });
 });

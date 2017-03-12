@@ -17,4 +17,10 @@ describe('Conn', () => {
   it('#connect', (done) => {
     server.on('connect', done);
   });
+
+  it('#hello package', (done) => {
+    server.on('package:hello', (helloPackage) => {
+      helloPackage && done();
+    });
+  });
 });
