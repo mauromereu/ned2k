@@ -20,7 +20,7 @@ describe('header packet', () => {
     assert(
       header.protocol == 0xe3 &&
       header.size == 16 &&
-      header.type == 0x01
+      header.optype == 0x01
     );
   });
 

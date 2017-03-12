@@ -11,8 +11,7 @@ describe('login request packet', () => {
     let buf = loginReq.encode();
 
     assert.deepEqual(buf.slice(0, 16), hex2buf(session.userHash));
-    assert.deepEqual(buf.readUInt32LE(16), session.clientIp);
+    assert.deepEqual(buf.readUInt32LE(16), session.clientId);
     assert.deepEqual(buf.readUInt16LE(20), session.tcpPort);
-    assert.deepEqual(buf.readUInt32LE(22), 4);
   });
 });
