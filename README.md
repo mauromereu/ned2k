@@ -1,6 +1,8 @@
 # ned2k
-emule协议的node实现，使得可以在服务器上下ed2k链接资源（逃
 
+node for ed2k protocol
+
+![travis-ci](https://travis-ci.org/ned2k/ned2k.svg?branch=master)
 
 ## How to Install
 ```bash
