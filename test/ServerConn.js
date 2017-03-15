@@ -8,50 +8,53 @@ describe('ServerConn', () => {
   let server = null;
   beforeEach(() => {
     server = new ServerConn(SERVER_HOST, SERVER_PORT);
-    server.isDone = false;
   });
 
   afterEach(() => {
     server.destory();
-  })
+  });
 
   it('#connect', (done) => {
     server.on('connect', done);
   });
 
   it('#login request', (done) => {
-    server.isDone = false;
     server.on('processend', (info) => {
-      if (!server.isDone) {
-        server.isDone = true;
-        done();
-      }
+      info && done();
     });
   });
 
   it('#server message', (done) => {
-    server.addListener('serverMessage', (message) => {
-      if (!server.isDone && message) {
-        server.isDone = true;
+    server.on('package:serverMessage', (message) => {
+      if (message) {
         done();
       }
     });
   });
 
   it('#server status', (done) => {
-    server.addListener('serverStatus', (data) => {
-      if (!server.isDone && data.users != null && data.files != null) {
-        server.isDone = true;
+    server.on('package:serverStatus', (data) => {
+      if (data.users != null && data.files != null) {
         done();
       }
     });
   });
 
   it('#id change', (done) => {
-    server.addListener('idChange', (newId) => {
-      if (!server.isDone && newId) {
-        done();
-      }
+    server.on('package:idChange', (newId) => {
+      newId && done();
+    });
+  });
+
+  it('#server list', (done) => {
+    server.on('package:serverList', (list) => {
+      list.length && done();
+    });
+  });
+
+  it('#server ident', (done) => {
+    server.on('package:serverIdent', (info) => {
+      info && done();
     });
   });
 });
