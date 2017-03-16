@@ -1,5 +1,5 @@
 const assert = require('assert');
-const SearchString = require('../../../lib/protocol/server/SearchString');
+const SearchString = require('../../../../lib/protocol/server/search/SearchString');
 const inspect = require('util').inspect;
 
 describe('search string test', () => {
@@ -48,21 +48,18 @@ describe('search string test', () => {
                 right: null
             }
         } 
-    }
+    };
     
     it('# formatSearchString', () => {
         let search = new SearchString(str);
         let rightGroup = ['(HelloWorld AND ((You OR Me) AND Best))', 'NOT', 'andycall'];
         let group = search.formatSearchString(str);
         assert.deepEqual(group, rightGroup);
-
-        let anotherString = '(HelloWorld AND ((You OR Me) AND Best))';
     });
 
     it('# generate binary tree', () => {
         let search = new SearchString(str);
         let binaryTree = search.buildSearchTree(str);
-
         assert.deepEqual(binaryTree, tree);
     });
 
