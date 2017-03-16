@@ -1,5 +1,5 @@
 const assert = require('assert');
-const SearchString = require('../../../lib/protocol/server/SearchString');
+const SearchString = require('../../../../lib/protocol/server/search/SearchString');
 const inspect = require('util').inspect;
 
 describe('search string test', () => {
@@ -102,7 +102,6 @@ describe('search string test', () => {
     it('# generate binary tree', () => {
         let search = new SearchString(str);
         let binaryTree = search.buildSearchTree(str);
-
         assert.deepEqual(binaryTree, tree);
     });
 
