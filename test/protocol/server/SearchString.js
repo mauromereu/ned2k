@@ -3,7 +3,7 @@ const SearchString = require('../../../lib/protocol/server/SearchString');
 const inspect = require('util').inspect;
 
 describe('search string test', () => {
-    const str = '(HelloWorld AND ((You OR Me) AND Best)) NOT andycall'    
+    const str = '(HelloWorld AND ((You OR Me) AND Best)) NOT andycall';
     const tree = {
         command: 'NOT',
         'NOT': {
@@ -49,14 +49,54 @@ describe('search string test', () => {
             }
         } 
     }
+
+    const strGroup = [
+        [
+            'HelloWorld OR Andycall',
+            'ORHelloWorldAndycall'
+        ],
+        [
+            '(HelloWorld AND ((You OR Me) AND Best)) NOT andycall',
+            'NOTANDHelloWorldANDORYouMeBestandycall'
+        ],
+        [
+            'andycall NOT (HelloWorld AND ((You OR Me) AND Best))',
+            'NOTandycallANDHelloWorldANDORYouMeBest'
+        ],
+        [
+            '(Hello AND ((AAAANDBBB OR CCCCOREEEE) NOT XXXXXX)) AND (OOOOEEX AND ORORBest)',
+            'ANDANDHelloNOTORAAAANDBBBCCCCOREEEEXXXXXXANDOOOOEEXORORBest'
+        ]
+    ]
     
     it('# formatSearchString', () => {
-        let search = new SearchString(str);
-        let rightGroup = ['(HelloWorld AND ((You OR Me) AND Best))', 'NOT', 'andycall'];
-        let group = search.formatSearchString(str);
-        assert.deepEqual(group, rightGroup);
+        let formatTestCase = [
+            [
+                '(HelloWorld AND ((You OR Me) AND Best)) NOT andycall',
+                ['HelloWorld AND ((You OR Me) AND Best)', 'NOT', 'andycall']
+            ],
+            [
+                'OOOOEEX AND ORORBest',
+                ['OOOOEEX', 'AND', 'ORORBest']
+            ],
+            [
+                'NOTA AND XXXORXXNOT',
+                ['NOTA', 'AND', 'XXXORXXNOT']
+            ],
+            [
+                'AAAANDBBB OR CCCCOREEEE',
+                ['AAAANDBBB', 'OR', 'CCCCOREEEE']
+            ]
+        ];
 
-        let anotherString = '(HelloWorld AND ((You OR Me) AND Best))';
+        formatTestCase.forEach(item => {
+            let str = item[0];
+            let result = item[1];
+            
+            let search = new SearchString(str);
+            let group = search.formatSearchString(str);
+            assert.deepEqual(group, result);
+        });
     });
 
     it('# generate binary tree', () => {
@@ -66,10 +106,19 @@ describe('search string test', () => {
         assert.deepEqual(binaryTree, tree);
     });
 
-    it('get Formated SearchString', () => {
+    it('# get Formated SearchString', () => {
         let search = new SearchString(str);
         let searchResult = search.printFormatedString();
         let result = 'NOTANDHelloWorldANDORYouMeBestandycall';
         assert.equal(searchResult, result);
+    });
+
+    it('# str group test', () => {
+        strGroup.forEach(item => {
+            let search = new SearchString(item[0]);
+            let searchResult = search.printFormatedString();
+            
+            assert.equal(searchResult, item[1]);
+        });
     });
 });
