@@ -53,19 +53,19 @@ describe('search string test', () => {
     const strGroup = [
         [
             'HelloWorld OR Andycall',
-            'ORHelloWorldAndycall'
+            'OR HelloWorld Andycall'
         ],
         [
             '(HelloWorld AND ((You OR Me) AND Best)) NOT andycall',
-            'NOTANDHelloWorldANDORYouMeBestandycall'
+            'NOT AND HelloWorld AND OR You Me Best andycall'
         ],
         [
             'andycall NOT (HelloWorld AND ((You OR Me) AND Best))',
-            'NOTandycallANDHelloWorldANDORYouMeBest'
+            'NOT andycall AND HelloWorld AND OR You Me Best'
         ],
         [
             '(Hello AND ((AAAANDBBB OR CCCCOREEEE) NOT XXXXXX)) AND (OOOOEEX AND ORORBest)',
-            'ANDANDHelloNOTORAAAANDBBBCCCCOREEEEXXXXXXANDOOOOEEXORORBest'
+            'AND AND Hello NOT OR AAAANDBBB CCCCOREEEE XXXXXX AND OOOOEEX ORORBest'
         ]
     ]
     
@@ -108,7 +108,7 @@ describe('search string test', () => {
     it('# get Formated SearchString', () => {
         let search = new SearchString(str);
         let searchResult = search.printFormatedString();
-        let result = 'NOTANDHelloWorldANDORYouMeBestandycall';
+        let result = 'NOT AND HelloWorld AND OR You Me Best andycall';
         assert.equal(searchResult, result);
     });
 
