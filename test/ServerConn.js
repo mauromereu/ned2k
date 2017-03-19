@@ -2,8 +2,8 @@ const assert = require('assert');
 const ServerConn = require('../lib/ServerConn');
 const Constant = require('../lib/Constant');
 
-const SERVER_HOST = '222.40.142.3';
-const SERVER_PORT = 40072;
+const SERVER_HOST = '195.154.83.5';
+const SERVER_PORT = 7111;
 
 describe('ServerConn', () => {
   let server = null;
@@ -69,19 +69,17 @@ describe('ServerConn', () => {
         size: 1024 * 1024 * 10,
         type: Constant.FILETYPE.IMAGE
       }]);
+      done();
     });
   });
 
   it('#search', (done) => {
     server.on('ready', () => {
       server.search({
-        originString: '(java OR nodejs) AND (php NOT it)',
-        type: Constant.FILETYPE.VIDEO,
-        minSize: 1024 * 1024,
-        maxSize: 10 * 1024 * 1024,
-        sourceNum: 10,
-        ext: 'jpg'
+        originString: 'java'
       });
-    });
+    }).on('package:searchResults', (files) => {
+      files.length && done();
+    })
   });
 });
