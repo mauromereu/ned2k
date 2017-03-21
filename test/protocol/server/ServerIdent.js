@@ -38,8 +38,5 @@ describe('server ident packet', () => {
     assert(decodeServIdent.port == serverIdent.port);
     assert(decodeServIdent.serverName == serverIdent.serverName);
     assert(decodeServIdent.serverDesc == serverIdent.serverDesc);
-    assert(decodeServIdent.tagList.length == 2);
-    assert(decodeServIdent.tagList[0].data == serverIdent.serverName);
-    assert(decodeServIdent.tagList[1].data == serverIdent.serverDesc);
   });
 });

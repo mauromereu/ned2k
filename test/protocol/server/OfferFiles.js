@@ -5,7 +5,7 @@ const OfferFiles = require('../../../lib/protocol/server/OfferFiles');
 describe('offer files packet', () => {
   it('#encode', () => {
     let offerFiles = new OfferFiles([{
-      hash: 'a',
+      hash: '00',
       ip: 0x0,
       port: 4662,
       name: 'a',
@@ -14,9 +14,9 @@ describe('offer files packet', () => {
     }]);
 
     let buf = offerFiles.encode();
-    assert.deepEqual(buf, [
+    assert.deepEqual(buf, Buffer.from([
       0x01, 0x00, 0x00, 0x00,
-      0x61, 0x00, 0x00, 0x00,
+      0x00, 0x00, 0x00, 0x00,
       0x00, 0x00, 0x00, 0x00,
       0x00, 0x00, 0x00, 0x00,
       0x00, 0x00, 0x00, 0x00,
@@ -29,6 +29,6 @@ describe('offer files packet', () => {
       0x00, 0x02, 0x01, 0x00,
       0x03, 0x03, 0x00, 0x44,
       0x6f, 0x63
-    ]);
+    ]));
   });
 });

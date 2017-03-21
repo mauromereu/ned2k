@@ -74,4 +74,18 @@ describe('tag', () => {
     assert(tags[3].type == Tag.TYPE.TT_STRING && tags[3].opcode == 0x01 && tags[3].data == 'w' && tags[3].totalSize == 7);
     assert(tags[4].type == Tag.TYPE.TT_FLOAT && tags[4].opcode == 0x01 && Math.abs(tags[4].data - 1.1) < 0.0001 && tags[4].totalSize == 8);
   });
+
+  it('#toKVObject static method', () => {
+    let tags = [
+      new Tag({ type: Tag.TYPE.TT_STRING, opcode: 0x01, data: 'a' }),
+      new Tag({ type: Tag.TYPE.TT_STRING, opcode: 0x02, data: 'b' }),
+    ];
+
+    let obj = Tag.toKVObject(tags, {
+      SERVERNAME: 0x01,
+      SERVERIDENT: 0x02
+    });
+
+    assert(obj.servername == 'a' && obj.serverident == 'b');
+  });
 });

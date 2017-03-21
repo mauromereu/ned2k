@@ -47,6 +47,10 @@ describe('search results packet', () => {
     assert(fileItem.hash == '00000000000000000000000000000000');
     assert(fileItem.ip == 0x0);
     assert(fileItem.port == 4662);
-    assert(fileItem.tagList.length == 5);
+    assert(fileItem.name == 'filename');
+    assert(fileItem.size == 1024 * 1024);
+    assert(fileItem.type == SearchResults.FILETYPE.VIDEO);
+    assert(fileItem.sources == 100);
+    assert(fileItem.complsrc == 1);
   });
 });
