@@ -1,8 +1,8 @@
 const assert = require('assert');
 const Conn = require('../lib/Conn');
 
-const SERVER_HOST = '222.40.142.3';
-const SERVER_PORT = 40072;
+const SERVER_HOST = '195.154.83.5';
+const SERVER_PORT = 7111;
 
 describe('Conn', () => {
   let server = null;

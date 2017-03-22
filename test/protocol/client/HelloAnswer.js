@@ -7,7 +7,7 @@ const Constant = require('../../../lib/Constant');
 
 describe('HelloAnswer Packet', () => {
   it('#encode', () => {
-    let session = new Session();
+    let session = new Session({ serverIp: 0x0, serverPort: 4662 });
     let helloAnswer = new HelloAnswer(session);
     let buf = helloAnswer.encode();
 
@@ -26,7 +26,7 @@ describe('HelloAnswer Packet', () => {
   });
 
   it('#decode', () => {
-    let session = new Session();
+    let session = new Session({ serverIp: 0x0, serverPort: 4662 });
     let helloAnswer = new HelloAnswer(session);
     let buf = helloAnswer.encode();
 

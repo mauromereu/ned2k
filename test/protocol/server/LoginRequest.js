@@ -6,7 +6,7 @@ const hex2buf = require('../../../lib/helper/hex2buf');
 
 describe('login request packet', () => {
   it('#encode', () => {
-    let session = new Session();
+    let session = new Session({ serverIp: 0x0, serverPort: 4662 });
     let loginReq = new LoginReqPacket(session);
     let buf = loginReq.encode();
 
