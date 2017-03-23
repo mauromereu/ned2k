@@ -23,6 +23,10 @@ describe('HelloAnswer Packet', () => {
     assert(tagList[3].type == Tag.TYPE.TT_STRING && tagList[3].data == Constant.MODSTR);
     assert(tagList[4].type == Tag.TYPE.TT_UINT32 && tagList[4].data == 0);
     assert(tagList[5].type == Tag.TYPE.TT_UINT32 && tagList[5].data != 0);
+
+    let serverBuf = buf.slice(-6);
+    assert(serverBuf.readUInt32LE(0) == session.serverIp);
+    assert(serverBuf.readUInt16LE(4) == session.serverPort);
   });
 
   it('#decode', () => {
@@ -44,5 +48,7 @@ describe('HelloAnswer Packet', () => {
     assert(tagList[4].type == Tag.TYPE.TT_UINT32 && tagList[4].data == 0);
     assert(tagList[5].type == Tag.TYPE.TT_UINT32 && tagList[5].data != 0);
 
+    assert(helloAnswer.serverIp == session.serverIp);
+    assert(helloAnswer.serverPort == session.serverPort);
   });
 });
